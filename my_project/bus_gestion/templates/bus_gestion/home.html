@@ -1,0 +1,11 @@
+{% if latest_list_bus_list %}
+    <ol>
+    {% for nom_bus in latest_list_bus_list %}
+        <li><a href="{% url 'bus_gestion:detail' nom_bus.id %}">{{nom_bus}}</a></li>
+    {% endfor %}
+    </ol>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% load static %}
+

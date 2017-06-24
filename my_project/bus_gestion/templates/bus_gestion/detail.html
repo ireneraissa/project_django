@@ -1,0 +1,12 @@
+<h1>{{ list_bus.id_ecran}}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% csrf_token %}
+
+{% block content %}
+    <form method="Info" class="info-form">{% csrf_token %}
+    {{ form.as_i }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
