@@ -1,0 +1,19 @@
+{% extends "bus_gestion/base_generic.html" %}
+
+{% block content %}
+    <h1>Bus List</h1>
+
+    {% if chauffeur_list %}
+    <ul>
+
+      {% for chauffeur in chauffeur_list %}
+      <li>
+        <a href="{{ chauffeur.get_absolute_url }}">{{ chauffeur.name }}</a> ({{chauffeur.surname}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no bus in the park.</p>
+    {% endif %}       
+{% endblock %}

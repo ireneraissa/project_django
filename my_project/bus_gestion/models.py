@@ -1,5 +1,6 @@
 
 from  django.db  import models
+from django.urls import reverse
 
 
 class Caracteristic(models.Model):
@@ -11,26 +12,15 @@ class Caracteristic(models.Model):
 		return self.surname 
 		return self.tel
 
-		#search_fields = ['name', 'surname', 'tel']
-		# def nom(self):
-		# 	self.name='irene raissa'
-		# 	self.save()
-		# def __str__(self):
-		# 	return self.name, self.surname, self.tel
-
 	def ajouter(self, char):
 		#req=mixer.blend('bus_gestion.Caracteristic', name='francois')
 		self.name= char
 		return self.name
 		# def deleting(self, var) :
 
-	 # 		instance=self.filter
-	 # 		delete(self.name==var)
-	 # 		return self.name 
 
-
-	 	#def Chauffeur(self):
-
+	def get_absolute_url(self):
+		return reverse('caracteristic-detail', args=[str(self.id)])
 
 class Info(models.Model):
 	#def information_bus(self):
@@ -54,6 +44,9 @@ class Info(models.Model):
 		self.numero_matricule=element
 		return self.numero_matricule
 
+	def get_absolute_url(self):
+		return reverse('info-detail', args=[str(self.id)])
+
 class Bus(models.Model):
 	list_bus=models.ForeignKey(Info, on_delete=models.CASCADE)
 	nom_bus=models.TextField()
@@ -63,3 +56,5 @@ class Bus(models.Model):
 	
 	def get_list_bus(self):	
 		print(self.list_bus)
+	def get_absolute_url(self):
+		return reverse('bus-detail', args=[str(self.id)])

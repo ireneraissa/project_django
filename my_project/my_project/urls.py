@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
+# Use static() to add url mapping to serve static files during development (only)
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-	url(r'', include('bus_gestion.urls')),
-
-    url(r'^admin/', admin.site.urls),
-    
-]
+	url(r'^admin/', admin.site.urls),
+	url(r'^bus/', include('bus_gestion.urls')),
+	url(r'^$', RedirectView.as_view(url='/bus/', permanent=True)),
+	] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

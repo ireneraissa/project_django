@@ -1,19 +1,38 @@
-from .models import Book, Author, BookInstance, Genre
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  {% block title %}<title>Local Library</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'bus_gestion/styles.css' %}">
+</head>
 
-def index(request):
-    """
-    View function for home page of site.
-    """
-    # Generate counts of some of the main objects
-    num_books=Book.objects.all().count()
-    num_instances=BookInstance.objects.all().count()
-    # Available books (status = 'a')
-    num_instances_available=BookInstance.objects.filter(status__exact='a').count()
-    num_authors=Author.objects.count()  # The 'all()' is implied by default.
-    
-    # Render the HTML template index.html with the data in the context variable
-    return render(
-        request,
-        'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
-    )
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-2">
+                {% block sidebar %}
+                <ul class="sidebar-nav">
+                  <li><a href="{% url 'bus_gestion:index' %}">Home</a></li>
+                  <li><a href="{% url 'bus_gestion:chauffeur'%}"> All driver</a></li>
+                  <li><a href="">All bus</a></li>
+                </ul>
+                {% endblock %}
+            </div>
+        <div class="col-sm-10 ">
+        {% block content %}{% endblock %}
+        </div>
+        </div>
+
+   </div>
+</body>
+</html>
