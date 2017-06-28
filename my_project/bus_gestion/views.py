@@ -17,9 +17,27 @@ from . import forms
 #def index(request):
 #    return HttpResponse("Hello, world. You're at the polls index. keep going")
 
-class HomeView(generic.ListView):
+
+
+def index(request):
+    """
+    View function for home page of site.
+    """
+    # Generate counts of some of the main objects
+    num_bus=Bus.objects.all().count()
+   
+    num_chauffeur=Caracteristic.objects.count()  # The 'all()' is implied by default.
+    
+    # Render the HTML template index.html with the data in the context variable
+    return render(
+        request,
+        'index.html',
+        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
+    )
+class HomeListView(generic.ListView):
+    model=Bus
 	template_name='bus_gestion/home.html'
-	context_object_name = 'latest_list_bus_list'
+	context_object_name = 'Bus_list'
 	def get_queryset(self):
 		"""
 		Return the last five published questions (not including those set to be
@@ -27,11 +45,18 @@ class HomeView(generic.ListView):
 		"""
 
 		return Bus.objects.all()
-		return Info.objects.all()[8:10]
+    def get_context_data(self, **kwargs):
+
+		#return Info.objects.all()[8:10]
+        # Call the base implementation first to get a context
+        context = super(HomeListView, self).get_context_data(**kwargs)
+        # Get the blog from id and add it to the context
+        context['some_data'] = 'This is just some data'
+        return context
 
 
 
-class DetailView(generic.ListView):
+class DetailView(generic.DetailView):
     model= Info
     template_name='bus_gestion/detail.html'
     context_object_name = 'latest_list_bus_list'

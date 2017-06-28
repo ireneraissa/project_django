@@ -18,21 +18,3 @@ class CaracteristicForm(forms.ModelForm):
 		return data
 
 
-class ChoiceInline(forms.TabularInline):
-    model = Choice
-    extra = 3
-
-class QuestionAdmin(admin.ModelAdmin):
-	fieldsets = [
-        (None,               {'fields': ['question_text']}),
-        ('Date information', {'fields': ['pub_date']}),
-    ]
-
-	inlines=[ChoiceInline]
-	list_display = ('question_text', 'pub_date')
-		
-	#def modifier(self, data):
-		#req=self.get('name')
-			#if req != data:
-			#	raise forms.ValidationError('i change the name')
-			#return data
