@@ -87,22 +87,17 @@
 <p id="n18" class="stm mis"><a href="#n18">18</a></p>
 <p id="n19" class="pln"><a href="#n19">19</a></p>
 <p id="n20" class="pln"><a href="#n20">20</a></p>
-<p id="n21" class="pln"><a href="#n21">21</a></p>
-<p id="n22" class="pln"><a href="#n22">22</a></p>
-<p id="n23" class="pln"><a href="#n23">23</a></p>
-<p id="n24" class="pln"><a href="#n24">24</a></p>
-<p id="n25" class="pln"><a href="#n25">25</a></p>
 
             </td>
             <td class="text">
 <p id="t1" class="stm run hide_run"><span class="key">from</span> <span class="nam">django</span> <span class="key">import</span> <span class="nam">forms</span><span class="strut">&nbsp;</span></p>
 <p id="t2" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t3" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span><span class="nam">models</span> <span class="key">import</span>  <span class="nam">Caracteristic</span><span class="op">,</span> <span class="nam">Info</span><span class="strut">&nbsp;</span></p>
+<p id="t3" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span><span class="nam">models</span> <span class="key">import</span> <span class="nam">Driver</span><span class="op">,</span> <span class="nam">Bus</span><span class="strut">&nbsp;</span></p>
 <p id="t4" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t5" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t6" class="stm run hide_run"><span class="key">class</span> <span class="nam">CaracteristicForm</span><span class="op">(</span><span class="nam">forms</span><span class="op">.</span><span class="nam">ModelForm</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t6" class="stm run hide_run"><span class="key">class</span> <span class="nam">DriverForm</span><span class="op">(</span><span class="nam">forms</span><span class="op">.</span><span class="nam">ModelForm</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t7" class="stm run hide_run">        <span class="key">class</span> <span class="nam">Meta</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t8" class="stm run hide_run">                <span class="nam">model</span><span class="op">=</span><span class="nam">Caracteristic</span><span class="strut">&nbsp;</span></p>
+<p id="t8" class="stm run hide_run">                <span class="nam">model</span><span class="op">=</span><span class="nam">Driver</span><span class="strut">&nbsp;</span></p>
 <p id="t9" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t10" class="stm run hide_run">                <span class="nam">fields</span><span class="op">=</span><span class="op">(</span><span class="str">'name'</span><span class="op">,</span> <span class="str">'surname'</span><span class="op">,</span> <span class="str">'tel'</span> <span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t11" class="pln"><span class="strut">&nbsp;</span></p>
@@ -115,11 +110,6 @@
 <p id="t18" class="stm mis">                <span class="key">return</span> <span class="nam">data</span><span class="strut">&nbsp;</span></p>
 <p id="t19" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t20" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t21" class="pln">        <span class="com">#def modifier(self, data):</span><span class="strut">&nbsp;</span></p>
-<p id="t22" class="pln">                <span class="com">#req=self.get('name')</span><span class="strut">&nbsp;</span></p>
-<p id="t23" class="pln">                        <span class="com">#if req != data:</span><span class="strut">&nbsp;</span></p>
-<p id="t24" class="pln">                        <span class="com">#       raise forms.ValidationError('i change the name')</span><span class="strut">&nbsp;</span></p>
-<p id="t25" class="pln">                        <span class="com">#return data</span><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -130,7 +120,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.4.1</a>,
-            created at 2017-06-21 15:11
+            created at 2017-06-28 22:16
         </p>
     </div>
 </div>

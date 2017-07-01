@@ -1,0 +1,36 @@
+{% extends "bus_gestion/base_generic.html"  %}
+{% block content %}
+
+<div class="col-sm-9">
+	<hr>
+	<h1>Driver</h1>
+	<br>
+	<br>
+	<br>
+	<div class="container">
+	{% for chauffeur in chauffeur_list %} 
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2">
+		    		<div class="driver ">
+		        
+				        <ul>
+				        	<li><a href="">{{ chauffeur.name}}</a></li>	
+				        </ul>
+				    </div>
+				</div>
+	     
+
+		    	<div class="col-sm-4">
+				    <a href=""><button type="submit" class="btn btn-warning"> modify </button></a>
+				    <button type="submit" class="btn btn-danger">cancel</button>
+				    <a href="{% url 'bus_gestion:detail_chauffeur' pk=chauffeur.pk %}"><button type="submit" class="btn btn-info"> show more </button></a>
+				</div>
+				
+			</div>
+		</form>
+	{% endfor %}     
+	</div>
+</div>
+{% endblock %}
+      

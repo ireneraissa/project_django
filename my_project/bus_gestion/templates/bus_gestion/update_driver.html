@@ -1,0 +1,10 @@
+
+{% extends "bus_gestion/base_generic.html"  %}
+{% block content %}
+
+<div class="col-sm-9">
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update" />
+</form>
+{% endblock %}

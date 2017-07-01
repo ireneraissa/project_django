@@ -1,0 +1,32 @@
+{% extends 'bus_gestion/base_generic.html' %}
+
+{% block content %}
+<div class="col-sm-9">
+  <hr>
+  <h1>{{ bus.nom_bus}}</h1>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    
+    <div class="driver">
+        
+        <ul>
+        	
+        	<li><span>id_ecran: {{ bus.id_ecran}}</span></li>
+        	<li><span>numero_ligne: {{ bus.numero_ligne}}</span></li>
+        	<li><span>nombre_place: {{ bus.nombre_place}}</span></li>
+        	<li><span>nombre_status_ecran: {{ bus.status_ecran}}</span></li>
+        	<li><span><a href="{% url 'bus_gestion:detail_chauffeur' pk=bus.pk %}">nom_chauffeur </a> : {{ bus.chauffeur}}</span></li>
+        	<li><span>numero_matricule : {{ bus.numero_matricule}}</span></li>
+        </ul>
+    </div>
+        
+</div>
+</div>
+
+{% endblock %}
+    
+  
+
+	

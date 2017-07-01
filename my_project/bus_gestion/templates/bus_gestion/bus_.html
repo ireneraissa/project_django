@@ -1,0 +1,75 @@
+{% extends "bus_gestion/base_generic.html"  %}
+{%load staticfiles %}
+{% block content %}
+<div class="col-sm-9">
+	<hr>
+	<h1>Bus</h1>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-sm-2">
+			<h4>nom_bus :</h4>
+	
+		</div>
+		<div class="col-sm-4">      
+		    <div class="input-group">
+			    <input type="text" class="form-control" placeholder="entrer le nom du bus" >
+			</div>
+	 	</div>
+	 </div>	 
+    
+    <br>
+	<div class="row">
+		<div class="col-sm-2">    
+			<h4>id_ecran:</h4>
+		</div>
+		<div class="col-sm-4"> 
+	    	<div class="input-group">
+	       		 <input type="text" class="form-control" placeholder="entrer le id de l'ecran" >
+	   		</div>
+		</div>
+	</div>
+	<br>       
+	<div class="row">
+		<div class="col-sm-2">        
+			<h4>numero_ligne :</h4>
+		</div>
+		<div class="col-sm-4"> 
+	    
+		    <div class="input-group">
+				<input type="text" class="form-control" placeholder="entrer le numero ligne">
+		    </div>
+		</div>
+	</div>
+
+	<br>       
+	<div class="row">
+		<div class="col-sm-2">        
+			<h4>numero_matricule :</h4>
+		</div>
+		<div class="col-sm-4"> 
+	    
+		    <div class="input-group">
+				<input type="text" class="form-control" placeholder="entrer le numero matricule">
+		    </div>
+		</div>
+	</div>
+
+	       
+	      
+	    
+	<br>
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-success">modify</button>
+	    <button type="submit" class="btn btn-danger">cancel</button>
+
+      
+	    </hr></div>
+    
+		      
+			</hr>
+
+{% endblock %}
+
+      

@@ -1,0 +1,45 @@
+{% extends "bus_gestion/base_generic.html" %}
+
+{% block content %}
+<div class="col-sm-9">
+  <hr>
+  <h1>Bus List</h1>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+
+        {% if bus_list %}
+        <div class="form-horizontale">
+          
+
+              {% for bus in bus_list %}
+          <div class="form-group">
+          <div class="col-sm-2">
+            <div class="driver">
+              <ul>
+
+                <li>
+                  <a href="{{ chauffeur.get_absolute_url }}">{{ bus.nom_bus }}</a> </li>
+              </ul>
+            </div>
+            </div>
+
+           
+            <a href="{% url 'bus_gestion:detail_bus' pk=bus.pk %}"><button type="submit" class="btn btn-warning"> show more </button></a>
+          </div>
+
+
+          {% endfor %}
+           <a href="{% url 'bus_gestion:new_bus'%}"><button type="submit" class="btn btn-primary"> Add </button></a>
+        </div>
+
+    {% else %}
+      <p>There are no bus in the park.</p>
+    {% endif %} 
+
+
+  </div>      
+  </div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'bus_gestion/base_generic.html' %}
+
+{% block content %}
+<div class="col-sm-9">
+  <hr>
+  <h1>{{ chauffeur.name}}</h1>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    
+    <div class="driver">
+        
+        <ul>
+        	
+        	<li><span>prenom: {{ chauffeur.surname}}</span></li>
+        	<li><span>tel: {{chauffeur.tel}}</span></li>
+        	<li><span>nombre_place: {{ chauffeur.name}}</span></li>
+        	
+        </ul>
+    </div>
+    <a href="{% url 'bus_gestion:update' %}"><button type="submit" class="btn btn-warning"> modify </button></a>
+    <a href="{% url 'bus_gestion:new_driver' %}"><button type="submit" class="btn btn-danger"> Add </button></a>
+        
+        
+</div>
+</div>
+
+{% endblock %}
+    

@@ -2,21 +2,19 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Caracteristic, Info
+from .models import Driver, Bus
 
-class InfoInline(admin.TabularInline):
-    model = Info
-    extra = 2
+class BusInline(admin.TabularInline):
+    model = Bus
+    extra = 1
 
-class CaracteristicAdmin(admin.ModelAdmin):
+class DriverAdmin(admin.ModelAdmin):
 	fieldsets = [
-        (None,               {'fields': ['name']}),
-        ('Date information', {'fields': ['surname']}),
-        (None,                {'fields':['tel']}),
+        ('Info Driver', {'fields': ['surname', 'name', 'tel']}),
     ]
 
-	inlines=[InfoInline]
+	inlines=[BusInline]
 	list_display = ('name', 'surname', 'tel')
 
-admin.site.register(Caracteristic, CaracteristicAdmin)
+admin.site.register(Driver, DriverAdmin)
 

@@ -6,18 +6,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from bus_gestion.models import Driver
+from django.urls import reverse_lazy
 import stripe
 from django.shortcuts import redirect
 from . import models
-from .models import Caracteristic, Info, Bus
+from .models import Driver, Bus
 from . import forms 
-
-
+from .forms  import DriverForm
 #def index(request):
 #    return HttpResponse("Hello, world. You're at the polls index. keep going")
-
-
 
 def index(request):
     """
@@ -26,7 +25,7 @@ def index(request):
     # Generate counts of some of the main objects
     num_bus=Bus.objects.all().count()
    
-    num_chauffeur=Caracteristic.objects.count()  # The 'all()' is implied by default.
+    num_chauffeur=Driver.objects.count()  # The 'all()' is implied by default.
     
     # Render the HTML template index.html with the data in the context variable
     return render(
@@ -35,9 +34,106 @@ def index(request):
         context={'num_bus':num_bus,'num_chaufffeur':num_chauffeur}
     )
 
+
+
+# # Create your views here.
+class DriverListView(generic.ListView):
+    model= Driver
+    template_name='bus_gestion/chauffeur.html'
+    context_object_name = 'chauffeur_list'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Driver.objects.all()
+# # Create your views here.
+class BusListView(generic.ListView):
+    model= Bus
+    template_name='bus_gestion/bus.html'
+    context_object_name = 'bus_list'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Bus.objects.all()
+# # Create your views here.
+class DetaildriverView(generic.DetailView):
+    model= Driver
+    template_name='bus_gestion/detail_chauffeur.html'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Driver.objects.all()
+
+class DetailbusView(generic.DetailView):
+    model= Bus
+    template_name='bus_gestion/detail_bus.html'
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Bus.objects.all()
+
+class DriverCreate(CreateView):
+    model = Driver
+    fields = ['name', 'surname', 'tel']
+    template_name='bus_gestion/drivercreate.html'
+
+class BusCreate(CreateView):
+    model =Bus
+    fields = ['nom_bus', 'numero_ligne', 'nombre_place', 'id_ecran']
+    template_name='bus_gestion/buscreate.html'
+
+
+
+
+
+
+
+
+
+
+
+class DriverUpdateView(generic.UpdateView):
+    model=Driver
+    template_name='bus_gestion/update_driver.html'
+    form_class=forms.DriverForm
+    success_url='/'
+    def post(self, request, *args, **kwargs):
+        if getattr(request.user, 'first_name', None) == 'martin':
+
+            raise Http404()
+
+        return super(DriverUpdateView, self).post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+
+        # Call the base implementation first to get a context
+        context = super(DriverListView, self).get_context_data(**kwargs)
+        # Get the blog from id and add it to the context
+        context['some_data'] = 'This is just some data'
+        return context
+
+
+def driver_edit(request, pk):
+    post = get_object_or_404(Driver, pk=pk)
+    if request.method == "POST":
+        form = DriverForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            
+            post.save()
+            return redirect('detail', pk=post.pk)
+    else:
+        form = DriverForm(instance=post)
+    return render(request, 'blog/driver_edit.html', {'form': form})
+
+
 class HomeListView(generic.ListView):
     model=Bus
-    template_name='bus_gestion/driver.html'
+    template_name='bus_gestion/bus_.html'
     context_object_name = 'Bus_list'
     def get_queryset(self):
         """
@@ -54,51 +150,3 @@ class HomeListView(generic.ListView):
         # Get the blog from id and add it to the context
         context['some_data'] = 'This is just some data'
         return context
-
-
-
-class DetailView(generic.DetailView):
-    model= Info
-    template_name='bus_gestion/detail.html'
-    context_object_name = 'latest_bus_list'
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Info.objects.all()
-
-
-
-
-# class DriverView(generic.DetailView):
-#     model= Caracteristic
-#     template_name='bus_gestion/driver.html'
-#     context_object_name = 'latest_list'
-
-#     def get_queryset(self):
-#         """
-#         Excludes any questions that aren't published yet.
-#         """
-#         return Caracteristic.objects.all()
-
-# # # Create your views here.
-class DriverListView(generic.ListView):
-    model= Caracteristic
-    template_name='bus_gestion/driver.html'
-    context_object_name = 'chauffeur_list'
-    requete=Caracteristic.objects.all()
-    def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Caracteristic.objects.all()
-# # Create your views here.
-    def get_context_data(self, **kwargs):
-
-        #return Info.objects.all()[8:10]
-        # Call the base implementation first to get a context
-        context = super(DriverListView, self).get_context_data(**kwargs)
-        # Get the blog from id and add it to the context
-        context['some_data'] = 'This is just some data'
-        return context
-

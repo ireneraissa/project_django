@@ -1,20 +1,141 @@
-{% extends "bus_gestion/base_generic.html"  %}
 
-{% block content %}
-<h1>Local Library Home</h1>
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    .col-sm-9 h1 {
+        
+        padding: 10px;
+        color: #2061c9;
+        font: italic bold 100px/0px Georgia, serif;
+        text-align: center;
+        margin-top: 0px;
+    }
+    .body {
+      background-color: #e7e7e7;
+    }
+    .col-sm-3.row  {
+      background-color: #b7bab4 ;
+      padding-top: ;
+    }
 
-  <p>Welcome to <em>LocalLibrary</em>, a place where you can have info on bus AFTU.</p>
+  
+    .row div a {
+      color: white;
+      font-size: 15pt;
+    }
+    /* Set gray background color and 100% height */
+    .col-sm-0.sidenav {
+      background-color: #2061c9;
+      font-size: 20pt;
 
-<h2>Dynamic content</h2>
 
-  <p>The library has the following record counts:</p>
-  <ul>
-    <li><strong>bus:</strong> {{ num_bus}}</li>
-    <li><strong>driver:</strong> {{ num_chauffeur }}</li>
+    }
+
     
-  </ul>
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 10px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
 
-{% endblock %}
+<body>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-0 sidenav">
+          <br>
+            <div class="row">
+             <div class="col-sm-3">
+                <div class="row">
+
+                    <div class="col-sm-3"><a href="{% url 'bus_gestion:index' %}">Home</a></span></div>
+                    <div class="col-sm-3"><a href="{% url 'bus_gestion:chauffeur' %}">All driver</a></span></div>
+                    <div class="col-sm-3"><a href="{% url 'bus_gestion:bus' %}">All bus</a></span></div>
+                </div>
+             </div>
+            
+            
+             <div class="col-sm-2"> 
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Blog..">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </span>
+                </div>
+             </div>
+            </div>
+            <br>
+        </div>
+        <div> </div>
+       
+{% block content %}
+    <div class="col-sm-9">
+
+            <br>
+            <br>
+
+        <h1>Bus Info</h1>
+        <br>
+        <h2>Local Library Home</h2>
+
+            <p>Welcome to <em>LocalLibrary</em>, a place where you can have info on bus AFTU.</p>
+
+        <h2>Dynamic content</h2>
+
+            <p>The library has the following record counts:</p>
+            <ol>
+                <li><strong>bus:</strong><span class="badge">{{num_bus}}</span></li>
+                <li><strong>driver:</strong><span class="badge">{{ num_chauffeur }}</span></li>
+                
+            </ol>
+    </div>
+
+    {% for driver in chauffeur_list %} 
+    <div class="post">
+        
+        <h1>
+        <ul>
+            <li><a href="{% url 'driver_detail' pk=post.pk %}">{{ driver.name}}</a></li>
+            <li><a href="{% url 'driver_detail' pk=post.pk %}">{{ driver.surname}}</a></li>
+        </ul></h1>
+        <p>{{ driver.tel|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}       
 <!-- Add additional CSS in static file --> 
 {% load static %} 
-<link rel="stylesheet" href="{% static 'bus_gestion/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'bus_gestion/style.css' %}">
+</div>
+</div>
+
+
+    <footer class="container-fluid">
+      <p>Footer Text</p>
+    </footer>
+
+</body>
+
+</html>
+

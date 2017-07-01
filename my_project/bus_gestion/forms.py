@@ -1,11 +1,11 @@
 from django import forms
 
-from .models import  Caracteristic, Info 
+from .models import Driver, Bus
 
 
-class CaracteristicForm(forms.ModelForm):
+class DriverForm(forms.ModelForm):
 	class Meta:
-		model=Caracteristic
+		model=Driver
 
 		fields=('name', 'surname', 'tel' )
 

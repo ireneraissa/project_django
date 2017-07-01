@@ -1,15 +1,15 @@
 from .. import forms
-from ..models import Caracteristic, Info
+from ..models import Driver, Bus
 
 import pytest
-class TestCaracteristicform:
+class TestDriverform:
 	def test_forms(self):
 
-		form= forms.CaracteristicForm(data={})
+		form= forms.DriverForm(data={})
 		
 		assert form.is_valid() is False, 'Should valid if no data given'
 
-		form=forms.CaracteristicForm(data={'name':'kameni', 'surname':'irene', 'tel' : 771710292})
+		form=forms.DriverForm(data={'name':'kameni', 'surname':'irene', 'tel' : 771710292})
 
 		assert form.is_valid() is True, 'should be '
 

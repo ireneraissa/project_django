@@ -1,9 +1,8 @@
-
 from  django.db  import models
 from django.urls import reverse
 
 
-class Caracteristic(models.Model):
+class Driver(models.Model):
 	name=models.TextField()
 	surname=models.TextField()
 	tel=models.IntegerField(default=0)
@@ -20,10 +19,11 @@ class Caracteristic(models.Model):
 
 
 	def get_absolute_url(self):
-		return reverse('caracteristic-detail', args=[str(self.id)])
+		return reverse('info-detail', args=[str(self.id)])
 
-class Info(models.Model):
-	#def information_bus(self):
+
+class Bus(models.Model):	
+	nom_bus=models.TextField()
 	id_ecran=models.TextField()
 	numero_matricule=models.IntegerField(default=0)
 	numero_ligne=models.IntegerField(default=0)
@@ -35,26 +35,15 @@ class Info(models.Model):
 		('F', 'closed'),
 	)
 	status_ecran=models.CharField(max_length=1, choices=status_choice)
-	chauffeur=models.ForeignKey(Caracteristic, on_delete=models.CASCADE)
+	chauffeur=models.ForeignKey(Driver, on_delete=models.CASCADE)
 
-	def __str__(self):
-		return self.id_ecran
 
 	def modify(self, element):
 		self.numero_matricule=element
 		return self.numero_matricule
-
-	def get_absolute_url(self):
-		return reverse('info-detail', args=[str(self.id)])
-
-class Bus(models.Model):
-	list_bus=models.ForeignKey(Info, on_delete=models.CASCADE)
-	nom_bus=models.TextField()
 	
 	def __str__(self):
 		return self.nom_bus
-	
-	def get_list_bus(self):	
-		print(self.list_bus)
+
 	def get_absolute_url(self):
 		return reverse('bus-detail', args=[str(self.id)])
